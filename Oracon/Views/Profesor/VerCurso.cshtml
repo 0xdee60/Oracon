@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "VerCurso";
+    Layout = null;
+}
+
+<h2>VerCurso</h2>
+
+<a href="/Profesor/CreateModulo?idCurso=@ViewBag.IdCurso.idCurso">Crear nuevo modulo</a>
+
+@if (ViewBag.Curso.modulos.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Titulo del modulo</th>
+                <th>Logro de la sesion</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Curso.modulos)
+            {
+                <tr>
+                    <td>@item.titulo</td>
+                    <td>@item.descripcion</td>
+                    <td>
+                        <a href="/Profesor/VerMaterialModulo?idModulo=@item.idModulo">Ver material</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>El curso no cuenta con modulos registrados</h3>
+}

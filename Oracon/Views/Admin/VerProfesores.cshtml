@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "VerProfesores";
+    Layout = null;
+}
+
+
+
+
+@if (ViewBag.Profesores.Count == 0)
+{
+    <h2>Aun no hay profesores registrados</h2>
+}
+else
+{
+    <h2>VerProfesores</h2>
+    <a href="/Admin/CreateDoctor">Agregar profesor</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombres completos</th>
+                <th>Fecha de nacimiento</th>
+                <th>Correo</th>
+                <th>Usuario</th>
+                <th>Celular</th>
+                <th>Dni</th>
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>Cursos</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in ViewBag.Profesores)
+            {
+                <tr>
+                    <td>
+                    <td>
+                        @if (x.foto != null)
+                        {
+                            var base64 = Convert.ToBase64String(x.foto);
+                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                            <img src='@imgsrc'
+                                 style="max-width:100px;max-height:100px" />
+                        }
+                        else
+                        {
+                            <img src="~/img/avatar-default.jpg"
+                                 style="max-width:100px;max-height:100px" />
+                        }
+                    </td>
+                    <td>@x.nombres @x.apellidos</td>
+                    <td>@x.fechaNac</td>
+                    <td>@x.correo</td>
+                    <td>@x.usuario</td>
+                    <td>@x.celular</td>
+                    <td>@x.dni</td>
+                    <td>@x.titulo</td>
+                    <td>@x.descripcion</td>
+                    <td>
+                        @if (x.cursos.Count > 0)
+                    {
+                            @foreach(var item in x.cursos)
+                        {
+                              @item.nombre 
+                                <br />
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        <label>sin cursos asignados</label>
+                    }
+                    </td>
+                    
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+}
+
+

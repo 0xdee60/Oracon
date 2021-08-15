@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewData["Title"] = "VerMaterialModulo";
+    Layout = null;
+}
+
+<h2>VerMaterialModulo</h2>
+
+
+<h3>Videos del moodulo</h3>
+<a href="/Profesor/AgregarVideoModulo?idModulo=@ViewBag.Modulo.idModulo">Agregar video</a>
+@if (ViewBag.Videos.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Titulo del video</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            @foreach (var video in ViewBag.Videos)
+            {
+                <tr>
+                    <td>@video.titulo</td>
+                    <td>@video.descripcion</td>
+                    <td>
+                        <iframe width="200" height="200" src="@video.link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </td>
+
+                </tr>
+            }
+
+
+
+
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No se han registrado videos en este modulo.</h4>
+}
+<br />
+<h3>Documentos del moodulo</h3>
+<a href="/Profesor/AgregarDocumentoModulo?idModulo=@ViewBag.Modulo.idModulo">Agregar documento</a>
+@if (ViewBag.Documentos.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Titulo del Documento</th>
+                <th>Descripcion</th>
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+            @foreach (var documento in ViewBag.Documentos)
+            {
+                <tr>
+                    <td>@documento.titulo</td>
+                    <td>@documento.descripcion</td>
+                    <td>
+                        @Html.ActionLink("Descargar", "PDFDisplay", "Profesor", new { idDocumento = documento.idDocumento }, new { target = "_blank" })
+
+                    </td>
+
+                </tr>
+            }
+
+
+
+
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No se han registrado Documentos en este modulo.</h4>
+}
+
+
+<br />
+
+<h3>Enlaces externos del modulo</h3>
+<a href="/Profesor/AgregarEnlaceModulo?idModulo=@ViewBag.Modulo.idModulo">Agregar enlace externo</a>
+@if (ViewBag.Enlaces.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Titulo del enlace</th>
+                <th>Descripcion</th>
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+            @foreach (var enlace in ViewBag.Enlaces)
+            {
+                <tr>
+                    <td>@enlace.titulo</td>
+                    <td>@enlace.descripcion</td>
+                    <td>
+                        <a href="@enlace.link">Ir a sitio externo</a>
+                    </td>
+
+                </tr>
+            }
+
+
+
+
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No se han registrado enlaces en este modulo.</h4>
+}
+
+<h3>Tareas del moodulo</h3>
+<a href="/Profesor/AgregarTareaModulo?idModulo=@ViewBag.Modulo.idModulo">Agregar tarea</a>
+@if (ViewBag.Tareas.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre de la tarea</th>
+                <th>Fecha limite</th>
+                <th>Fecha de creacion</th>
+                <th>instrucciones</th>
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+            @foreach (var tarea in ViewBag.Tareas)
+            {
+                <tr>
+                    <td>@tarea.nombre</td>
+                    <td>@tarea.fechaMaxima</td>
+                    <td>@tarea.fechaCreacion</td>
+                    <td>@tarea.instrucciones</td>
+                    <td>
+                   
+                        <a href="/Profesor/VerEntregas?idTarea=@tarea.idTarea"> Ver entregas </a>
+                    </td>
+
+                </tr>
+            }
+
+
+
+
+        </tbody>
+    </table>
+}
+else
+{
+    <h4>No tiene tareas pendientes.</h4>
+}

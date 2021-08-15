@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "EnviarTarea";
+    Layout = null;
+}
+
+<h2>EnviarTarea</h2>
+
+<form action="/Usuario/EnviarTarea" method="post" enctype="multipart/form-data">
+    <input hidden name="idTarea" value="@ViewBag.IdTarea" />
+    <label>Descricion: (opcional) </label>
+    <input name="observacion" type="text" />
+    <br />
+    <label>Documento: (pdf) </label>
+    <input name="documento" type="file" />
+    <br />
+    <br />
+    <button type="submit">Crear</button>
+
+</form>

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "VerModulosCurso";
+    Layout = null;
+}
+
+
+
+@if (ViewBag.Pago.estado == "SIN PAGO")
+{
+    <h3>Para tener acceso al curso debe pagar la matricula de @ViewBag.Pago.monto nuevos soles.</h3>
+}
+else
+{
+    <h2>VerModulosCurso</h2>
+    @if (ViewBag.Modulos.Count > 0)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Titulo del modulo</th>
+                    <th>Logro de la sesion</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.Modulos)
+                {
+                    <tr>
+                        <td>@item.titulo</td>
+                        <td>@item.descripcion</td>
+                        <td>
+                            <a href="/Usuario/VerMaterialModulo?idModulo=@item.idModulo">Ver material</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h3>El curso no cuenta con modulos registrados</h3>
+    }
+
+}
+
+
+

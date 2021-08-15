@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "AgregarEnlaceModulo";
+    Layout = null;
+}
+
+<h2>AgregarEnlaceModulo</h2>
+<form action="/Profesor/AgregarEnlaceModulo" method="post">
+    <input hidden name="idModulo" value="@ViewBag.IdModulo" />
+    <label>Titulo</label>
+    <input type="text" name="titulo" />
+    <br />
+    <label>Descripcion</label>
+    <input type="text" name="descripcion"/>
+    <br />
+    <label>Enlace</label>
+    <input name="link" type="text"/>
+    <br /><br />
+    <button type="submit">Guardar</button>
+</form>

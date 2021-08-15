@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "AgregarCurso";
+    Layout = null;
+}
+
+<h2>AgregarCurso</h2>
+
+
+<form action="/Admin/AgregarCurso" method="post">
+    <label>Nombre: </label>
+    <input type="text" name="nombre" />
+    <br />
+    <label>Descripcion: </label>
+    <input type="text" name="descripcion" />
+    <br />
+    <label>Video presentacion inicial: </label>
+    <input type="text" name="videoPresentacion" />
+    <br />
+    <label>Profesor: </label>
+    <select name="idProfesor">
+        @foreach(var z in ViewBag.Profesores)
+            {
+                <option value="@z.idProfesor">@z.nombres @z.apellidos - @z.titulo</option>
+            }
+    </select>
+    <br />
+    <label>Precio: </label>
+    <input type="text" name="precio" />
+    <br />
+    <label>Estado: </label>
+    <select name="estado">
+       
+            <option value="ACTIVO">Activo</option>
+            <option value="NO ACTIVO">No Activo</option>
+        
+    </select>
+    <br /><br />
+    <button type="submit">Guardar</button>
+</form>

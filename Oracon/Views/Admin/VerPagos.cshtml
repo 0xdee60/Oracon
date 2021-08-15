@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "VerPagos";
+    Layout = null;
+}
+
+<h2>VerPagos</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Estudiante</th>
+            <th>Curso</th>
+            <th>Fecha de emision</th>
+            <th>Total</th>
+
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var x in ViewBag.Pagos)
+        {
+            <tr>
+                <td>@x.matricula.usuario.nombres @x.matricula.usuario.apellidos</td>
+                <td>@x.matricula.curso.nombre</td>
+                <td>@x.fechaPago</td>
+                <td>@x.monto</td>
+                <td>
+                    @if(x.estado == "SIN PAGO") { 
+                    <form action="/Admin/CancelarPago" method="post">
+                        <input hidden value="@x.idPago" name="idPago" />
+                        <button type="submit">Pagar</button>
+                    </form>
+                    
+                    }
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>

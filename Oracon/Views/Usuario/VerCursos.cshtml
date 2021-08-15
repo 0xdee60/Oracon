@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "VerCursos";
+    Layout = null;
+}
+
+
+@if (ViewBag.CursosInscritos.Count == 0)
+{
+
+
+<h3>Aun no cuenta co cursos registrados</h3>
+}
+else
+{
+<h1>VerCursos</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Curso nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in ViewBag.CursosInscritos)
+        {
+
+            <tr>
+                <td>@ViewBag.UsuarioLogeado.nombres</td>
+                <td>@ViewBag.UsuarioLogeado.apellidos</td>
+
+                <td>
+
+                    @i.curso.nombre <label> <br /> </label>
+                   
+                </td>
+                <td>
+                    <a href="/Usuario/VerModulosCurso?idCurso=@i.curso.idCurso">Ver contenido</a>
+                </td>
+
+            </tr>
+        }
+        </tbody>
+</table>
+
+}
+

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "CreateModulo";
+    Layout = null;
+}
+
+<h2>CreateModulo</h2>
+
+<form action="/Profesor/CreateModulo" method="post">
+    <input hidden value="@ViewBag.IdCurso" name="idCurso" />
+    <label>Titulo: </label>
+    <input type="text" name="titulo" />
+    <br />
+    <label>Descripcion: </label>
+    <input type="text" name="descripcion" />
+    
+    <br /><br />
+    <button type="submit">Guardar</button>
+</form>

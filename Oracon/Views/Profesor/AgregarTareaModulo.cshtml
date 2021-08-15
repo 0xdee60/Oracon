@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "AgregarTareaModulo";
+    Layout = null;
+}
+
+<h2>AgregarTareaModulo</h2>
+<form action="/Profesor/AgregarTareaModulo" method="post" enctype="multipart/form-data">
+    <input hidden name="idModulo" value="@ViewBag.IdModulo" />
+    <label>Titulo de la tarea: </label>
+    <input name="nombre" type="text" />
+    <br />
+    <label>Instrucciones: </label>
+    <input name="instrucciones" type="text" />
+    <br />
+    <label>Fecha limite de entrega: </label>
+    <input name="fechaMaxima" type="datetime" />
+    <br />
+    <br />
+    <button type="submit">Crear</button>
+
+</form>

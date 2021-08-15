@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "AgregarDocumentoModulo";
+    Layout = null;
+}
+
+<h2>AgregarDocumentoModulo</h2>
+
+<form action="/Profesor/AgregarDocumentoModulo" method="post" enctype="multipart/form-data">
+    <input hidden name="idModulo" value="@ViewBag.IdModulo"  />
+    <label>Titulo del documento: </label>
+    <input name="titulo" type="text" />
+    <br />
+    <label>Descripcion: </label>
+    <input name="descripcion" type="text" />
+    <br />
+    <label>Documento: (pdf) </label>
+    <input name="documento" type="file" />
+    <br />
+    <br />
+    <button type="submit">Crear</button>
+
+</form>

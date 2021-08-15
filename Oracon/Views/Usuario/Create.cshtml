@@ -1,0 +1,50 @@
+﻿
+@{ ViewData["Title"] = "Create";}
+
+@if (TempData["CreateUsuario"] != "") {
+<div class="row alert alert-danger" style="margin:0;padding:0; text-align:center">
+    @TempData["CreateUsuario"]
+</div>
+}
+
+<div class="row">
+    <div class="col-sm-6">
+        <img width="100%" height="102%" alt="imgLoginUsuario" src="~/images/female.jpg" />
+    </div>
+    <div class="col-sm-6" style="align-content:center; align-items:center; text-align:center">
+        <br />
+        <img width="10%" height="10%" alt="icoLoginUsuario" src="~/images/20.png" />
+        <h1 class="display-2">Registrarme</h1>
+        <form action="/Usuario/Create" method="post">
+            <br />
+            <div class="form-group">
+                <label class="form-text">Nombres: </label>
+                <input value="" placeholder="Ej. Juan Fernando" class="form-control" type="text" name="nombres" />
+            </div>
+            <div class="form-group">
+                <label class="form-text">Apellidos: </label>
+                <input value="" placeholder="Ej. Escalante Aliaga" class="form-control" type="text" name="apellidos" />
+            </div>
+            <div class="form-group">
+                <label class="form-text">Fecha de nacimiento: </label>
+                <input value="" class="form-control" type="date" name="fechaNac" />
+            </div>
+            <div class="form-group">
+                <label class="form-text">Correo: </label>
+                <input value="" placeholder="Ej. juan_escalante@gmail.com" class="form-control" type="email" name="correo" />
+            </div>
+            <div class="form-group">
+                <label class="form-text">Usuario: </label>
+                <input value="" placeholder="Ej. usuario123" class="form-control" type="text" name="usuario" />
+            </div>
+            <div class="form-group">
+                <label class="form-text">Contraseña: </label>
+                <input value="" class="form-control" type="password" name="passwd" />
+            </div>
+
+            <button class="btn" style="color: white; background-color: #ff2f00" type="submit">Crear</button>
+            <a href="/Usuario/Login" class="btn btn-secondary">Regresar</a>
+        </form>
+        <br />
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "AgregarVideoModulo";
+    Layout = null;
+}
+
+<h2>AgregarVideoModulo</h2>
+
+<form action="/Profesor/AgregarVideoModulo" method="post">
+    <input hidden name="idModulo" value="@ViewBag.IdModulo"/>
+    <label>Titulo del video: </label>
+    <input name="titulo" type="text"/>
+    <br />
+    <label>Descripcion: </label>
+    <input name="descripcion" type="text"/>
+    <br />
+    <label>Enlace: (YOUTUBE) </label>
+    <input name="link" type="text"/>
+    <br />
+    <br />
+    <button type="submit">Crear</button>
+
+</form>
