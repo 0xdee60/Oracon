@@ -52,20 +52,24 @@ namespace Oracon.Controllers
 
             //obtener usuario logeado
             var claim = HttpContext.User.Claims.FirstOrDefault();
-            var user = cnx.Usuarios.Where(o => o.usuario == claim.Value).First();
+            var user = cnx.Usuarios.Where(o => o.usuario == claim.Value)
+                .Include(o=>o.cursos).First();
             ViewBag.UsuarioLogeado = user;
 
             //obtener lista de cursos
             var cursos = cnx.Cursos.Include(o => o.profesor).Include("etiquetas.categoria").ToList();
             ViewBag.CursosDisponibles = cursos;
 
-            List<Matricula> cursosinscritos = user.cursos;
-
-            ViewBag.CursosInscrito = cursosinscritos;
 
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login", "Usuario");
+        }
 
 
         [Authorize]
@@ -80,6 +84,7 @@ namespace Oracon.Controllers
 
             var cursos = cnx.Matriculas.Where(o => o.idUsuario == user.idUsuario).Include(o => o.curso).ToList();
             ViewBag.CursosInscritos = cursos;
+
             return View();
         }
 
@@ -94,7 +99,8 @@ namespace Oracon.Controllers
 
             if (matriculado != null)
             {
-
+                var nombrecurso = cnx.Cursos.Where(o => o.idCurso == idCurso).First();
+                TempData["AgregarCurso"] = "Usted ya se encuentra inscrito en <<" + nombrecurso.nombre + ">>"; 
             }
             else
             {
@@ -397,6 +403,21 @@ namespace Oracon.Controllers
             return View();
         }
 
+        public bool validarCurso(int idCurso,int idUsuario)
+        {
+            bool x = false;
+
+            var user = cnx.Usuarios.Where(o => o.idUsuario == idUsuario)
+                .Include(o => o.cursos).First();
+
+            if (user.cursos.Where(o=>o.idCurso == idCurso) == null)
+            {
+                x = true;
+            }
+
+
+            return x;
+        }
 
         [HttpGet]
         public ActionResult EnviarTarea(int idTarea)
