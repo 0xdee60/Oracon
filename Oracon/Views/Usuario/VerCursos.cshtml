@@ -1,48 +1,120 @@
 ﻿
 @{
     ViewData["Title"] = "VerCursos";
-    Layout = null;
+
 }
+
+
+<nav class="navbar navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box; ">
+    <div class="collapse navbar-collapse">
+
+        <div class="col-lg-2" style="text-align:center">
+            <a href="/Home/Index" class="nav-item active">
+                <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
+            </a>
+
+        </div>
+        <div class="col-lg-6" style="text-align:center">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <a href="/Usuario/IndexUsuario" style="color:white">CURSOS</a>
+
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+                    <a href="/Usuario/VerCursos" style="color:white">MI APRENDIZAJE</a>
+                </div>
+                <div class="col-lg-3" style="text-align:center">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="row ">
+                <div class="col-lg-1">
+
+                </div>
+
+
+                <div class="col-lg-7" style="color: white; align-items: center; align-content: center; text-align: center">
+                    <label style="padding:0.2em; margin:0.2em;">Bienvenido, @ViewBag.UsuarioLogeado.nombres</label>
+                </div>
+
+                <div class="col-lg-4">
+                    <form method="post" action="/Usuario/Logout">
+                        <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</nav>
+
+<h1 class="display-3" href="/Usuario/VerCursos" style="text-align:center;">MIS CURSOS</h1>
+
+
 
 
 @if (ViewBag.CursosInscritos.Count == 0)
 {
-
-
-<h3>Aun no cuenta co cursos registrados</h3>
+    <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center; align-items:center;">
+        Aun no se ha inscrito en ningun curso.
+    </div>
 }
 else
 {
-<h1>VerCursos</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Curso nombre</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var i in ViewBag.CursosInscritos)
-        {
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <table class="table table-striped" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Profesor</th>
+                        <th>Curso nombre</th>
+                        <th>Estado</th>
+                        <th>Promedio acumulado</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var i in ViewBag.CursosInscritos)
+                    {
 
-            <tr>
-                <td>@ViewBag.UsuarioLogeado.nombres</td>
-                <td>@ViewBag.UsuarioLogeado.apellidos</td>
+                    <tr>
+                        <td>@i.codigoMatricula</td>
 
-                <td>
+                        <td>@i.curso.profesor.nombres @i.curso.profesor.apellidos</td>
+                        <td>@i.curso.nombre</td>
+                        <td>@i.estadoMatricula</td>
+                        <td>@i.promedio</td>
 
-                    @i.curso.nombre <label> <br /> </label>
-                   
-                </td>
-                <td>
-                    <a href="/Usuario/VerModulosCurso?idCurso=@i.curso.idCurso">Ver contenido</a>
-                </td>
+                        
+                        <td>
+                            <a class="btn" style="color:white; background-color:#ff2f00" href="/Usuario/VerModulosCurso?idCurso=@i.curso.idCurso">Ver contenido</a>
+                        </td>
 
-            </tr>
-        }
-        </tbody>
-</table>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
 
 }
+
+<div style="align-items:center; align-content:center; text-align:center;">
+    <br />
+
+    <a class="btn" style="color:white; background-color:#ff2f00;" href="javascript: history.go(-1)">Regresar</a>
+    <br />
+</div>
 

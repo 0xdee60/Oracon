@@ -57,11 +57,40 @@ namespace Oracon.Controllers
             ViewBag.UsuarioLogeado = user;
 
             //obtener lista de cursos
-            var cursos = cnx.Cursos.Include(o => o.profesor).Include("etiquetas.categoria").ToList();
+            var cursos = cnx.Cursos.Include(o => o.profesor).Where(o=>o.estado == "Activo").Include("etiquetas.categoria").ToList();
             ViewBag.CursosDisponibles = cursos;
 
-
+            var categorias = cnx.Categorias.ToList();
+            
+            //obtener categorias disponibles
+            ViewBag.CategoriasDisponibles = categorias;
+            
             return View();
+        }
+
+        public ActionResult CursoCategoria(int idCategoria)
+        {
+
+
+            //obtener usuario logeado
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Usuarios.Where(o => o.usuario == claim.Value)
+                .Include(o => o.cursos).First();
+            ViewBag.UsuarioLogeado = user;
+
+            //obtener lista de cursos
+            var cursos = cnx.Etiquetas.Include("curso.profesor").Where(o=>o.idCategoria == idCategoria).ToList();
+            ViewBag.CursosDisponibles = cursos;
+
+            var categorias = cnx.Categorias.ToList();
+
+            //obtener categorias disponibles
+            ViewBag.CategoriasDisponibles = categorias;
+
+
+            ViewBag.CategoriaSeleccionada = cnx.Categorias.Where(o=>o.idCategoria == idCategoria).FirstOrDefault();
+            return View();
+
         }
 
         [HttpPost]
@@ -82,7 +111,7 @@ namespace Oracon.Controllers
             var user = cnx.Usuarios.Where(o => o.usuario == claim.Value).First();
             ViewBag.UsuarioLogeado = user;
 
-            var cursos = cnx.Matriculas.Where(o => o.idUsuario == user.idUsuario).Include(o => o.curso).ToList();
+            var cursos = cnx.Matriculas.Where(o => o.idUsuario == user.idUsuario).Include("curso.profesor").ToList();
             ViewBag.CursosInscritos = cursos;
 
             return View();
