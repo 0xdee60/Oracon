@@ -59,15 +59,15 @@
 {
     <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center; align-items:center;">
         @TempData["AgregarCurso"]
-        
+
     </div>}
 @if (ViewBag.CursosDisponibles.Count == 0)
 {
 
-<div class="row alert alert-danger" style="margin:0;padding:0; text-align:center">
-    Aun no se ha registrado ningun curso.
-    
-</div> 
+    <div class="row alert alert-danger" style="margin:0;padding:0; text-align:center">
+        Aun no se ha registrado ningun curso.
+
+    </div>
 }
 else
 {
@@ -81,7 +81,7 @@ else
                         <th>Descripcion</th>
                         <th>Profesor</th>
                         <th>Precio</th>
-                        
+
                         <th>Video</th>
                         <th></th>
                     </tr>
@@ -94,7 +94,7 @@ else
                             <td>@x.descripcion</td>
                             <td>@x.profesor.nombres @x.profesor.apellidos</td>
                             <td>@x.precio</td>
-                            
+
                             <td>
 
                                 <iframe width="500" height="300" src="@x.videoPresentacion" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -151,7 +151,6 @@ else
                             <th>Descripcion</th>
                             <th>Profesor</th>
                             <th>Precio</th>
-                            <th>Etiquetas</th>
                             <th>Video</th>
                             <th></th>
                         </tr>
@@ -164,7 +163,7 @@ else
                                 <td>@x.curso.descripcion</td>
                                 <td>@x.curso.profesor.nombres @x.curso.profesor.apellidos</td>
                                 <td>S/. @x.curso.precio</td>
-                                
+
                                 <td>
                                     <!-- Button  modal -->
                                     <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" style="color: white; background-color: #ff2f00;">
@@ -181,7 +180,7 @@ else
                                                 <div class="modal-body ">
                                                     <iframe width="450px" height="300px" src="@x.curso.videoPresentacion" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                     <br />
-                                                    
+
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div style="align-items:center; align-content:center; text-align:center;">
@@ -218,16 +217,45 @@ else
 }
 <div style="align-items:center; align-content:center; text-align:center;">
     <br />
-   
-            <a class="btn" style="color:white; background-color:#ff2f00;" href="javascript: history.go(-1)">Regresar</a>
-     &nbsp;
-     &nbsp;
-     &nbsp;
-            <a class="btn" style="color:white; background-color:#ff2f00;" href="/Usuario/IndexUsuario">Quitar filtro</a>
+
+    <a class="btn" style="color:white; background-color:#ff2f00;" href="javascript: history.go(-1)">Regresar</a>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <a class="btn" style="color:white; background-color:#ff2f00;" href="/Usuario/IndexUsuario">Quitar filtro</a>
 
     <br />
 </div>
 
+
+<br />
+<footer class="text-lg-start bg-light text-muted" style="margin:10px;">
+    <div class="row">
+        <hr />
+        <div class="col-lg-5">
+            <a target="_blank" href="https://www.facebook.com/AsesoriaEmpresarialOracon">
+                <img src="~/images/18-184179_free-facebook-icon-png-vector-fb-icon-black.png" height="45px" width="35px" alt="logofb" />
+            </a>
+
+            &nbsp;
+            <a target="_blank" href="https://www.youtube.com/channel/UCg9BYxEe8ft9H7IOspIhccw">
+                <img src="~/images/640px-YouTube_dark_icon_(2017).svg.png" height="45px" width="60px" alt="youtube" />
+            </a>
+
+            <a target="_blank" href="https://pe.linkedin.com/in/jhener-tejada-cerdán-9a63bb173">
+                <img src="~/images/black-linkedin-icon.png" height="65px" width="65px" alt="linkedin" />
+            </a>
+
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-5 text-right">
+            Copyright © ORACON
+        </div>
+    </div>
+
+
+
+</footer>
 <script>
     $(document).ready(function () {
         $('#dtBasicExample').DataTable();
