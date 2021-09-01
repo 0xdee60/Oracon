@@ -222,7 +222,7 @@ namespace Oracon.Controllers
             }
             else
             {
-                if (nombres.Length <= 4 || nombres == "")
+                if (nombres.Length <= 3 || nombres == "")
                 {
                     validaciones.Add("El nombre de usuario no es valido. (min. 4 caracteres).");
                 }
@@ -234,7 +234,7 @@ namespace Oracon.Controllers
             }
             else
             {
-                if (apellidos.Length <= 4 || apellidos == "")
+                if (apellidos.Length <= 3 || apellidos == "")
                 {
                     validaciones.Add("Los apellidos del usuario no son validos. (min. 4 caracteres).");
                 }
@@ -271,9 +271,9 @@ namespace Oracon.Controllers
             }
             else
             {
-                if (passwd.Length <= 8 || passwd == "")
+                if (passwd.Length <= 3 || passwd == "")
                 {
-                    validaciones.Add("La contraseña del usuario debe contar minimo con 8 caracteres.");
+                    validaciones.Add("La contraseña del usuario debe contar minimo con 4 caracteres.");
 
                 }
             }
@@ -291,9 +291,9 @@ namespace Oracon.Controllers
                 }
                 else
                 {
-                    if (usuario.Length <= 5 || passwd == "")
+                    if (usuario.Length <= 3 || passwd == "")
                     {
-                        validaciones.Add("El nombre de usuario de contener minimo 5 caracteres).");
+                        validaciones.Add("El nombre de usuario de contener minimo 4 caracteres).");
 
                     }
                 }
