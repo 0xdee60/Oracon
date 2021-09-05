@@ -55,6 +55,12 @@
 <br />
 <h1 class="display-4" style="text-align:center;">Material de estudio</h1>
 <br />
+@if(TempData["AgregarRecurso"] != null)
+            {
+<div class="row alert alert-warning" style="margin:0;padding:0; text-align:center; align-items:center;">
+    @TempData["AgregarRecurso"]
+</div>
+            }
 <div class="container">
     <h2 class="display-5">Videos</h2>
     <a class="btn" style="background-color:#ff2f00; color:white;" href="/Profesor/AgregarVideoModulo?idModulo=@ViewBag.Modulo.idModulo">Agregar video</a>

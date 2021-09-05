@@ -60,6 +60,7 @@ namespace Oracon.Controllers
             return View();
         }
 
+        
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -120,7 +121,7 @@ namespace Oracon.Controllers
             return View();
         }
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult CreateModulo(int idCurso)
         {
@@ -157,7 +158,7 @@ namespace Oracon.Controllers
             return View();
         }
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult AgregarVideoModulo(int idModulo)
         {
@@ -169,6 +170,8 @@ namespace Oracon.Controllers
 
             ViewBag.ProfesorLogeado = user;
 
+
+            
             return View();
         }
 
@@ -181,7 +184,7 @@ namespace Oracon.Controllers
 
             if (vid != null)
             {
-                TempData["AgregarRecurso"] = "El video ya existe";
+                TempData["AgregarRecurso"] = "El video ya existe.";
                 return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
                 
             }
@@ -193,12 +196,12 @@ namespace Oracon.Controllers
             video.descripcion = descripcion;
             cnx.Videos.Add(video);
             cnx.SaveChanges();
-            TempData["AgregarRecurso"] = "El video se agrego con éxito";
+            TempData["AgregarRecurso"] = "El video se agrego con éxito.";
             return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
         }
 
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult AgregarDocumentoModulo(int idModulo)
         {
@@ -221,6 +224,7 @@ namespace Oracon.Controllers
 
             if (vid != null)
             {
+                TempData["AgregarRecurso"] = "El documento ya existe.";
                 return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
             }
             var document = new Documento();
@@ -232,7 +236,7 @@ namespace Oracon.Controllers
             document.descripcion = descripcion;
             cnx.Documentos.Add(document);
             cnx.SaveChanges();
-
+            TempData["AgregarRecurso"] = "El documento se agrego con éxito.";
             return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
         }
 
@@ -287,7 +291,7 @@ namespace Oracon.Controllers
 
 
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult AgregarEnlaceModulo(int idModulo)
         {
@@ -299,6 +303,7 @@ namespace Oracon.Controllers
 
             ViewBag.ProfesorLogeado = user;
 
+            
 
             return View();
         }
@@ -311,6 +316,7 @@ namespace Oracon.Controllers
 
             if (li != null)
             {
+                TempData["AgregarRecurso"] = "El enlace externo sya existe.";
                 return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
             }
             var enlace = new Enlace();
@@ -321,6 +327,8 @@ namespace Oracon.Controllers
             
             cnx.Enlaces.Add(enlace);
             cnx.SaveChanges();
+            TempData["AgregarRecurso"] = "El enlace externo se agrego con éxito.";
+
 
             return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
         }
@@ -355,7 +363,7 @@ namespace Oracon.Controllers
 
 
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult AgregarTareaModulo(int idModulo)
         {
@@ -379,6 +387,7 @@ namespace Oracon.Controllers
 
             if (vid != null)
             {
+                TempData["AgregarRecurso"] = "La tarea ya existe.";
                 return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
             }
             var tarea = new Tarea();
@@ -391,7 +400,7 @@ namespace Oracon.Controllers
 
             cnx.Tareas.Add(tarea);
             cnx.SaveChanges();
-
+            TempData["AgregarRecurso"] = "La tarea se agrego con éxito.";
             return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
         }
 
