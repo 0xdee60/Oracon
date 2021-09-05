@@ -33,7 +33,7 @@ namespace Oracon.Controllers
             this.hostingEnvironment = hostingEnvironment;
         }
 
-        
+        [Authorize]
         public ActionResult Index()
         {
             //obtener usuario logeado
@@ -45,8 +45,9 @@ namespace Oracon.Controllers
                 return RedirectToAction("Login","Profesor");
             }
             
+           
             ViewBag.CursosProf = cnx.Cursos.Where(o => o.idProfesor == user.idProfesor).ToList();
-            
+            ViewBag.ProfesorLogeado = user;
 
             return View();
         }
@@ -57,6 +58,13 @@ namespace Oracon.Controllers
         public ActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login", "Profesor");
         }
 
         [HttpPost]
@@ -77,6 +85,10 @@ namespace Oracon.Controllers
 
                 return RedirectToAction("Index", "Profesor");
             }
+            else
+            {
+                TempData["LoginProfesor"] = "Usuario y/o contraseña invalidos.";
+            }
 
             return View();
         }
@@ -90,6 +102,7 @@ namespace Oracon.Controllers
             return Convert.ToBase64String(hash);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult VerCurso(int idCurso)
         {
@@ -98,6 +111,11 @@ namespace Oracon.Controllers
                 .FirstOrDefault();
             ViewBag.Curso = cnx.Cursos.Where(o => o.idCurso == idCurso)
                 .Include(o=>o.modulos).FirstOrDefault();
+            //obtener usuario logeado
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Profesores.Where(o => o.usuario == claim.Value).FirstOrDefault();
+
+            ViewBag.ProfesorLogeado = user; 
 
             return View();
         }
@@ -139,6 +157,13 @@ namespace Oracon.Controllers
         public ActionResult AgregarVideoModulo(int idModulo)
         {
             ViewBag.IdModulo = idModulo;
+
+            //obtener usuario logeado
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Profesores.Where(o => o.usuario == claim.Value).FirstOrDefault();
+
+            ViewBag.ProfesorLogeado = user;
+
             return View();
         }
 
@@ -146,12 +171,14 @@ namespace Oracon.Controllers
         public ActionResult AgregarVideoModulo(int idModulo, string link, string titulo, string descripcion)
         {
             var vid = cnx.Videos.Where(o => o.idModulo == idModulo &&
-            o.link == link.Replace("watch?v=", "embed/") && o.titulo == titulo &&
+            o.link == link && o.titulo == titulo &&
             o.descripcion == descripcion).FirstOrDefault();
 
             if (vid != null)
             {
+                TempData["AgregarRecurso"] = "El video ya existe";
                 return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
+                
             }
             var video = new Video();
             video.idModulo = idModulo;
@@ -279,7 +306,7 @@ namespace Oracon.Controllers
         }
 
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult VerMaterialModulo(int idModulo)
         {
@@ -296,6 +323,12 @@ namespace Oracon.Controllers
             ViewBag.Tareas = modulo.tareas.ToList();
 
             ViewBag.Modulo = modulo;
+
+            //obtener usuario logeado
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Profesores.Where(o => o.usuario == claim.Value).FirstOrDefault();
+
+            ViewBag.ProfesorLogeado = user;
 
             return View();
         }
