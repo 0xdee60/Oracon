@@ -125,6 +125,11 @@ namespace Oracon.Controllers
         public ActionResult CreateModulo(int idCurso)
         {
             ViewBag.IdCurso = cnx.Cursos.Where(o => o.idCurso == idCurso).FirstOrDefault().idCurso;
+            //obtener usuario logeado
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Profesores.Where(o => o.usuario == claim.Value).FirstOrDefault();
+
+            ViewBag.ProfesorLogeado = user;
 
             return View();
         }
@@ -188,7 +193,7 @@ namespace Oracon.Controllers
             video.descripcion = descripcion;
             cnx.Videos.Add(video);
             cnx.SaveChanges();
-
+            TempData["AgregarRecurso"] = "El video se agrego con éxito";
             return RedirectToAction("VerMaterialModulo", "Profesor", new { idModulo = idModulo });
         }
 
@@ -198,6 +203,13 @@ namespace Oracon.Controllers
         public ActionResult AgregarDocumentoModulo(int idModulo)
         {
             ViewBag.IdModulo = idModulo;
+
+            //obtener usuario logeado
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Profesores.Where(o => o.usuario == claim.Value).FirstOrDefault();
+
+            ViewBag.ProfesorLogeado = user;
+
             return View();
         }
 
@@ -280,6 +292,14 @@ namespace Oracon.Controllers
         public ActionResult AgregarEnlaceModulo(int idModulo)
         {
             ViewBag.IdModulo = idModulo;
+
+            //obtener usuario logeado
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Profesores.Where(o => o.usuario == claim.Value).FirstOrDefault();
+
+            ViewBag.ProfesorLogeado = user;
+
+
             return View();
         }
 
@@ -339,6 +359,11 @@ namespace Oracon.Controllers
         [HttpGet]
         public ActionResult AgregarTareaModulo(int idModulo)
         {
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Profesores.Where(o => o.usuario == claim.Value).FirstOrDefault();
+
+            ViewBag.ProfesorLogeado = user;
+
             ViewBag.IdModulo = idModulo;
             return View();
         }
@@ -377,6 +402,12 @@ namespace Oracon.Controllers
 
             var entregas = cnx.Entregas.Where(o => o.idTarea == idTarea).Include(o=>o.usuario).ToList();
             ViewBag.Entregas = entregas;
+            //obtener usuario logeado
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Profesores.Where(o => o.usuario == claim.Value).FirstOrDefault();
+
+            ViewBag.ProfesorLogeado = user;
+
             return View();
         }
 

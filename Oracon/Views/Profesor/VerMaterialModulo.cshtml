@@ -139,11 +139,12 @@ else
 @if (ViewBag.Documentos.Count > 0)
 {
     <div class="container">
-        <table>
-            <thead>
+        <table class="table">
+            <thead style="background-color:black; color: white;">
                 <tr>
-                    <th>Titulo del Documento</th>
+                    <th>Titulo del documento</th>
                     <th>Descripcion</th>
+                    <th></th>
                 </tr>
 
             </thead>
@@ -157,15 +158,10 @@ else
                         <td>@documento.descripcion</td>
                         <td>
                             @Html.ActionLink("Descargar", "PDFDisplay", "Profesor", new { idDocumento = documento.idDocumento }, new { target = "_blank" })
-
                         </td>
 
                     </tr>
                 }
-
-
-
-
             </tbody>
         </table>
     </div>
@@ -183,7 +179,7 @@ else
 }
 <br />
 <div class="container">
-    <h2 class="display-5">Enlaces externos del modulo</h2>
+    <h2 class="display-5">Enlaces externos</h2>
     <a class="btn" style="background-color:#ff2f00; color:white;" href="/Profesor/AgregarEnlaceModulo?idModulo=@ViewBag.Modulo.idModulo">Agregar enlace externo</a>
 </div>
 
@@ -191,11 +187,12 @@ else
 @if (ViewBag.Enlaces.Count > 0)
 {
     <div class="container">
-        <table>
-            <thead>
+        <table class="table">
+            <thead style="background-color:black; color:white;">
                 <tr>
                     <th>Titulo del enlace</th>
                     <th>Descripcion</th>
+                    <th></th>
                 </tr>
 
             </thead>
@@ -208,7 +205,7 @@ else
                         <td>@enlace.titulo</td>
                         <td>@enlace.descripcion</td>
                         <td>
-                            <a href="@enlace.link">Ir a sitio externo</a>
+                            <a class="btn" style="background-color:#ff2f00; color:white;" href="@enlace.link" target="_blank">Ir a sitio externo</a>
                         </td>
 
                     </tr>
@@ -230,14 +227,13 @@ else
 
 <br />
 <div class="container">
-    <h2 class="display-5">Tareas del modulo</h2>
+    <h2 class="display-5">Tareas</h2>
     <a class="btn" style="background-color:#ff2f00; color:white;" href="/Profesor/AgregarTareaModulo?idModulo=@ViewBag.Modulo.idModulo">Agregar tarea</a>
 </div>
 
 @if (ViewBag.Tareas.Count > 0)
 {
     <div class="container">
-        <br />
         <table class="table">
             <thead style="background-color:black; color:white;">
                 <tr>
@@ -261,15 +257,11 @@ else
                         <td>@tarea.instrucciones</td>
                         <td>
 
-                            <a href="/Profesor/VerEntregas?idTarea=@tarea.idTarea"> Ver entregas </a>
+                            <a class="btn" style="background-color:#ff2f00; color:white;" href="/Profesor/VerEntregas?idTarea=@tarea.idTarea"> Ver entregas </a>
                         </td>
 
                     </tr>
                 }
-
-
-
-
             </tbody>
         </table>
     </div>
@@ -285,4 +277,8 @@ else
     </div>
 }
 <br />
+<br />
+<div style="align-content:center; align-items:center; text-align:center;">
+    <a class="btn" style="color:white; background-color:#ff2f00;" href="/Profesor/Index">Regresar al inicio</a>
+</div>
 
