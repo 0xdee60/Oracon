@@ -266,8 +266,30 @@ else
                                     }
                                     else
                                     {
+                                        
+                                            var flaging = false;
+                                            foreach (var zz in ViewBag.TareasPresentadas)
+                                            {
+                                                if (zz.tarea.idTarea == tarea.idTarea && zz.idUsuario == ViewBag.UsuarioLogeado.idUsuario)
+                                                {
+                                                    flaging = true;
+                                                }
+                                            }
 
-                                        <h4 class="text-success">Tarea presentada</h4>
+                                            if (flaging)
+                                            {
+
+
+                                                <h4 class="text-success">Tarea presentada</h4>
+                                            }
+                                            else
+                                            {
+
+                                                <a class="btn" style="background-color:#ff2f00; color:white;" href="/Usuario/EnviarTarea?idTarea=@tarea.idTarea">Presentar tarea</a>
+
+
+                                            }
+                           
                                     }
                                 </td>
 
