@@ -4,16 +4,16 @@
 }
 
 
-<nav class="navbar navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box;">
+<nav class="navbar  fixed-top navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box;">
     <div class="collapse navbar-collapse">
 
         <div class="col-lg-2" style="text-align:center">
-            <a href="/Home/Index" class="nav-item active">
+            <a href="/Profesor/Index" class="nav-item active">
                 <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
             </a>
 
         </div>
-        <div class="col-lg-6" style="text-align:center">
+        <div class="col-lg-5" style="text-align:center">
 
             <div class="row">
                 <div class="col-lg-3">
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div class="row ">
                 <div class="col-lg-7" style="color: white; align-items: center; align-content: center; text-align: center">
                     <label style="padding:0.2em; margin:0.2em;">Bienvenido, @ViewBag.ProfesorLogeado.nombres</label>
@@ -51,26 +51,24 @@
 </nav>
 
 
-
-<br />
 <h1 class="display-4" style="text-align:center;">Agregar video</h1>
 <div class="container">
     <br />
     <form action="/Profesor/AgregarVideoModulo" method="post">
         <input hidden name="idModulo" value="@ViewBag.IdModulo" />
         <label class="form-label">Titulo del video: </label>
-        <input name="titulo" type="text" class="form-control" placeholder="Ej: Este es un titulo"/>
+        <input name="titulo" type="text" class="form-control" placeholder="Ej: Este es un titulo" />
         <br />
         <label class="form-label">Descripcion: </label>
-        <textarea class="form-control" name="descripcion" type="text" placeholder="Ej: Esta es una descripcion" ></textarea>
+        <textarea class="form-control" name="descripcion" type="text" placeholder="Ej: Esta es una descripcion"></textarea>
         <br />
         <label class="form-label">Enlace: (YOUTUBE) <a target="_blank" href="https://www.youtube.com/embed/8RnbtXPVbTA">Tutorial</a> </label>
-        <input name="link" type="url" class="form-control" placeholder="Ej: https://www.youtube.com/embed/8RnbtXPVbTA"/>
+        <input name="link" type="url" class="form-control" placeholder="Ej: https://www.youtube.com/embed/8RnbtXPVbTA" />
         <br />
         <br />
         <div style="align-content:center; align-items:center; text-align:center;">
             <button class="btn" style="background-color:#ff2f00; color:white;" type="submit">Crear</button>
             <a style="color:#ff2f00;" href="/Profesor/VerMaterialModulo?idModulo=@ViewBag.IdModulo">Cancelar</a>
         </div>
-        </form>
+    </form>
 </div>
