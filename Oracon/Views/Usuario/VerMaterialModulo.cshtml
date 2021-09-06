@@ -4,45 +4,44 @@
 
 }
 
-
-<nav class="navbar navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box; ">
+<nav class="navbar fixed-top navbar-expand navbar-dark row" style="background-color: black; box-sizing: content-box; ">
     <div class="collapse navbar-collapse">
 
         <div class="col-lg-2" style="text-align:center">
-            <a href="/Home/Index" class="nav-item active">
+            <a href="/Usuario/IndexUsuario" class="nav-item active">
                 <img src="~/images/logo blanco.png" alt="Logo ORACON" width="80px" height="65px" />
             </a>
 
         </div>
-        <div class="col-lg-6" style="text-align:center">
+        <div class="col-lg-5" style="text-align:center">
 
             <div class="row">
                 <div class="col-lg-3">
                     <a href="/Usuario/IndexUsuario" style="color:white">CURSOS</a>
 
                 </div>
-                <div class="col-lg-3" style="text-align:center">
+                <div class="col-lg-4" style="text-align:center">
                     <a href="/Usuario/VerCursos" style="color:white">MI APRENDIZAJE</a>
                 </div>
-                <div class="col-lg-3" style="text-align:center">
+                <div class="col-lg-2" style="text-align:center">
 
                 </div>
 
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div class="row ">
                 <div class="col-lg-1">
 
                 </div>
 
 
-                <div class="col-lg-7" style="color: white; align-items: center; align-content: center; text-align: center">
+                <div class="col-lg-6" style="color: white; align-items: center; align-content: center; text-align: center">
                     <label style="padding:0.2em; margin:0.2em;">Bienvenido, @ViewBag.UsuarioLogeado.nombres</label>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <form method="post" action="/Usuario/Logout">
                         <button class="btn" type="submit" style="color: white; background-color: #ff2f00;">CERRAR SESÍON</button>
                     </form>
@@ -56,10 +55,7 @@
     </div>
 </nav>
 
-
-
-<br />
-<h2 class="display-4" style="text-align:center;">@ViewBag.Modulo.titulo</h2>
+<h1 class="display-4" style="text-align:center;">@ViewBag.Modulo.titulo</h1>
 
 @if (ViewBag.Videos.Count == 0 && ViewBag.Documentos.Count == 0
 && ViewBag.Enlaces.Count == 0 && ViewBag.Tareas.Count == 0)
@@ -79,8 +75,8 @@ else
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
-                <table class="table table-striped" cellspacing="0">
-                    <thead>
+                <table class="table">
+                    <thead style="background-color:black; color:white;">
                         <tr>
                             <th>Titulo del video</th>
                             <th>Descripcion</th>
@@ -97,33 +93,12 @@ else
                                 <td>@video.descripcion</td>
                                 <td>
                                     <!-- Button  modal -->
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" style="color: white; background-color: #ff2f00;">
+                                    <a class="btn" target="_blank" href="@video.link" style="color: white; background-color: #ff2f00;">
                                         Ver video
-                                    </button>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Presentación del curso</h5>
-                                                    <br />
-
-                                                </div>
-                                                <div class="modal-body ">
-                                                    <iframe width="450px" height="300px" src="@video.link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                    <br />
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <div style="align-items:center; align-content:center; text-align:center;">
-                                                        <br />
-                                                        <button class="btn" data-dismiss="modal" aria-label="Close" style="color:white; background-color:#ff2f00;">Regresar</button>
-                                                        <br />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </a>
+                                   
+                 
+                                      
                                 </td>
 
                             </tr>
@@ -152,8 +127,8 @@ else
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
-                <table class="table table-striped" cellspacing="0">
-                    <thead>
+                <table class="table">
+                    <thead style="background-color:black; color:white;">
                         <tr>
                             <th>Titulo del Documento</th>
                             <th>Descripcion</th>
@@ -202,8 +177,8 @@ else
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
-                <table class="table table-striped" cellspacing="0">
-                    <thead>
+                <table class="table">
+                    <thead style="background-color:black; color:white;">
                         <tr>
                             <th>Titulo del enlace</th>
                             <th>Descripcion</th>
@@ -249,8 +224,8 @@ else
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
-                <table class="table table-striped" cellspacing="0">
-                    <thead>
+                <table class="table">
+                    <thead style="background-color:black; color:white;">
                         <tr>
                             <th>Nombre</th>
                             <th>Fecha limite</th>
@@ -314,12 +289,12 @@ else
     <br />
 }
 
+
+
 <div style="align-items:center; align-content:center; text-align:center;">
+    <br />
 
-
-    <a class="btn" style="color:white; background-color:#ff2f00;" href="javascript: history.go(-1)">Regresar</a>
-
-
+    <a class="btn" style="color:white; background-color:#ff2f00;" href="/Usuario/VerCursos">Regresar a cursos</a>
     <br />
 </div>
 
