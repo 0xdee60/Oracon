@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Oracon.Models;
 using System;
@@ -13,14 +15,20 @@ namespace Oracon.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        OraconContext cnx;
 
-        public HomeController(ILogger<HomeController> logger)
+        public readonly IConfiguration configuration;
+
+        public HomeController(ILogger<HomeController> logger, OraconContext cnx, IConfiguration configuration)
         {
             _logger = logger;
+            this.cnx = cnx;
         }
 
         public IActionResult Index()
         {
+            var cursos = cnx.Cursos.Include(o => o.profesor).Include("etiquetas.categoria").ToList();
+            ViewBag.Cursos = cursos;
             return View();
         }
 
