@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,13 +41,16 @@ namespace Oracon.Controllers
 
             return Convert.ToBase64String(hash);
         }
+        [Authorize]
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.Pagos = cnx.Pagos.Include("matricula.usuario").Include("matricula.curso").ToList();
+
             return View();
         }
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult CreateDoctor()
         {
@@ -164,7 +168,7 @@ namespace Oracon.Controllers
                 var c = new Curso();
                 c.nombre = nombre;
                 c.descripcion = descripcion;
-                c.videoPresentacion = videoPresentacion.Replace("watch?v=","embed/");
+                c.videoPresentacion = videoPresentacion;
                 c.idProfesor = idProfesor;
                 c.precio = precio;
                 c.estado = estado;
@@ -177,9 +181,22 @@ namespace Oracon.Controllers
             return RedirectToAction("VerCursos", "Admin");
         }
 
+        [HttpPost]
+        public ActionResult ActivarCurso(int idCurso)
+        {
 
+            var curso = cnx.Cursos.Where(o => o.idCurso == idCurso).FirstOrDefault();
+
+            curso.estado = "ACTIVO";
+
+            cnx.Update(curso);
+            cnx.SaveChanges();
+            return RedirectToAction("VerCursos", "Admin");
+        }
+
+        [Authorize]
         [HttpGet]
-        public ActionResult VerCursos()
+        public async Task<IActionResult> VerCursos()
         {
 
             var cursos = cnx.Cursos.Include(o => o.profesor).Include("etiquetas.categoria").ToList();
@@ -242,9 +259,18 @@ namespace Oracon.Controllers
 
                 return RedirectToAction("Index", "Admin");
             }
-
+            TempData["LoginAdmin"] = "Usuario y/o contraseña incorrectos.";
             return View();
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login", "Admin");
+        }
+
 
 
     }
