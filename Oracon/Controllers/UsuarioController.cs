@@ -422,12 +422,19 @@ namespace Oracon.Controllers
 
         public ActionResult VerMaterialModulo(int idModulo)
         {
+            // obtener usuario logeado
+            var claim = HttpContext.User.Claims.FirstOrDefault();
+            var user = cnx.Usuarios.Where(o => o.usuario == claim.Value).First();
+            ViewBag.UsuarioLogeado = user;
+
             //obtener modulo
             var modulo = cnx.Modulos.Where(o => o.idModulo == idModulo).Include(o => o.videos)
                 .Include(o => o.documentos).Include(o => o.enlaces).Include("tareas.entregas").FirstOrDefault();
 
             ViewBag.Modulo = cnx.Modulos.Where(o => o.idModulo == idModulo).Include(o => o.videos)
                 .FirstOrDefault();
+
+            ViewBag.TareasPresentadas = cnx.Entregas.Where(o=>o.idUsuario == user.idUsuario).Include(o=>o.tarea).ToList();
 
             //videos del modulo
             ViewBag.Videos = modulo.videos.ToList();
@@ -438,10 +445,6 @@ namespace Oracon.Controllers
             //Tareas pendientes
             ViewBag.Tareas = modulo.tareas.ToList();
 
-            //obtener usuario logeado
-            var claim = HttpContext.User.Claims.FirstOrDefault();
-            var user = cnx.Usuarios.Where(o => o.usuario == claim.Value).First();
-            ViewBag.UsuarioLogeado = user;
 
             return View();
         }

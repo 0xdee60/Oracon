@@ -61,10 +61,11 @@
         <label class="form-label">Descripcion: </label>
         <textarea class="form-control" name="descripcion"></textarea>
         <br />
-        <label class="form-label">Video presentacion inicial: </label>
+        <label class="form-label">Video presentacion inicial: <a target="_blank" href="https://www.youtube.com/embed/8RnbtXPVbTA">Tutorial</a> </label>
         <input class="form-control" type="url" name="videoPresentacion" />
         <br />
-        <label class="form-label">Profesor: </label>
+        <label class="form-label">Profesor: </label> <label>No se encuentra en la lista?
+        <a href="/Admin/CreateDoctor">Registre un nuevo docente</a></label>
         <select class="form-control" name="idProfesor">
             @foreach (var z in ViewBag.Profesores)
             {

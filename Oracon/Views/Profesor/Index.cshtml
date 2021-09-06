@@ -78,33 +78,10 @@
                     <td>@x.descripcion</td>
                     <td>@x.precio</td>
                     <td>
-                        <!-- Button  modal -->
-                        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" style="color: white; background-color: #ff2f00;">
-                            Ver video
-                        </button>
+                       
+                       <a href="@x.videoPresentacion" class="btn" style="background-color:#ff2f00; color:white" target="_blank">Ver Video</a>
 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Presentación del curso</h5>
-                                        <br />
-
-                                    </div>
-                                    <div class="modal-body col-lg-12">
-                                        <iframe width="450px" height="300px" src="@x.videoPresentacion" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div style="align-items:center; align-content:center; text-align:center;">
-                                            <br />
-                                            <button class="btn" data-dismiss="modal" aria-label="Close" style="color:white; background-color:#ff2f00;">Regresar</button>
-                                            <br />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    
 
                     </td>
                     <td>
